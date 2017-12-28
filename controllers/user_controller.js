@@ -20,7 +20,21 @@ module.exports = {
         utils.createUserSession(req, res, user);
         res.redirect('/dashboard');
       })
-      .catch(next);
+      .catch((err) => {
+        if (err.code === 11000) {
+          res.render('register', {
+            title: 'Register', 
+            error: 'Email already taken',
+            csrfToken: req.csrfToken()
+          });
+        } else {
+          res.render('register', {
+            title: 'Register', 
+            error: 'Opps! Something went wrong, try again.',
+            csrfToken: req.csrfToken()
+          });
+        }
+      });
   },
 
   read(req, res, next) {
@@ -33,7 +47,13 @@ module.exports = {
           throw new Error('Incorrect password')
         }
       })
-      .catch(next);
+      .catch((err) => {
+        res.render('login', {
+          title: 'Login', 
+          error: 'Incorrect email or password',
+          csrfToken: req.csrfToken()
+         });
+      });
   },
 
   logout(req, res, next) {

@@ -24,4 +24,4 @@ module.exports = (app) => {
 
   app.post('/login', userController.read);
 
-}
+};

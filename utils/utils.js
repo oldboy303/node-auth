@@ -12,7 +12,7 @@ module.exports = {
 
   requireLogin(req, res, next) {
     if (!req.session.user) {
-      res.redirect('/login');
+      res.re('/login');
     } else {
       next();
     }

@@ -1,5 +1,8 @@
 <div class="panel panel-default col-sm-6 col-sm-offset-3">
   <div class="panel-body">
+    {{#if error}}
+      <h3 style="color: red">Error: {{error}}</h3>
+    {{/if}}
     <form action="/login" method="post">
       <input type="hidden" name="_csrf" value="{{csrfToken}}">
       <div class="form-group">

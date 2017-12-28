@@ -26,8 +26,4 @@ app.use(csurf());
 
 routes(app);
 
-app.use((err, req, res, next) => {
-  res.status(422).send({ error: err.message });
-});
-
 module.exports = app;
