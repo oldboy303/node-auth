@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser');
 const sessions = require("client-sessions");
+const csurf = require('csurf');
 const routes = require('./routes/routes');
 
 mongoose.Promise = global.Promise;
@@ -20,6 +21,8 @@ app.use(sessions({
   duration: 30 * 60 * 1000,
   activeDuration: 5 * 60 * 1000
 }));
+
+app.use(csurf());
 
 routes(app);
 

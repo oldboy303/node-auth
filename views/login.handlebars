@@ -1,6 +1,7 @@
 <div class="panel panel-default col-sm-6 col-sm-offset-3">
   <div class="panel-body">
     <form action="/login" method="post">
+      <input type="hidden" name="_csrf" value="{{csrfToken}}">
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" class="form-control" name="email" placeholder="Email">
