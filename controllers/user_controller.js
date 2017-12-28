@@ -24,7 +24,7 @@ module.exports = {
   },
 
   read(req, res, next) {
-    User.findOne({email: req.body.email})
+    User.findOne({ email: req.body.email })
       .then((user) => {
         if (bcrypt.compareSync(req.body.password, user.password)) {
           utils.createUserSession(req, res, user);
@@ -34,6 +34,13 @@ module.exports = {
         }
       })
       .catch(next);
+  },
+
+  logout(req, res, next) {
+    if (req.session) {
+      req.session.reset();
+    }
+    res.redirect('/');
   }
 
 }

@@ -1,4 +1,5 @@
 const userController = require('../controllers/user_controller');
+const utils = require('../utils/utils');
 
 module.exports = (app) => {
   // Main Routes
@@ -9,9 +10,11 @@ module.exports = (app) => {
   app.get('/login', (req, res) => res.render('login', { title: 'Login'}));
 
   // Auth Routes
-  app.get('/dashboard', (req, res) => {
+  app.get('/dashboard', utils.requireLogin, (req, res) => {
     res.render('dashboard', { title: 'Dashboard', user: req.session.user });
   });
+
+  app.get('/logout', userController.logout);
 
   app.post('/register', userController.create);
 
