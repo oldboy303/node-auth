@@ -8,6 +8,10 @@ module.exports = {
     };
 
     req.session.user = cleanUser;
+  },
+
+  requireLogin(req, res, next) {
+    
   }
 
 }

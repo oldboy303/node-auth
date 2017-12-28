@@ -15,6 +15,6 @@ module.exports = (app) => {
 
   app.post('/register', userController.create);
 
-  
+  app.post('/login', userController.read);
 
 }

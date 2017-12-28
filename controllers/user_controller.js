@@ -20,7 +20,20 @@ module.exports = {
         utils.createUserSession(req, res, user);
         res.redirect('/dashboard');
       })
-      .catch(next)
+      .catch(next);
+  },
+
+  read(req, res, next) {
+    User.findOne({email: req.body.email})
+      .then((user) => {
+        if (bcrypt.compareSync(req.body.password, user.password)) {
+          utils.createUserSession(req, res, user);
+          res.redirect('/dashboard');
+        } else {
+          throw new Error('Incorrect password')
+        }
+      })
+      .catch(next);
   }
 
 }
